@@ -1,6 +1,9 @@
+import os
+import json
+from typing import Optional
 from pydantic_settings import BaseSettings
 import firebase_admin
-from firebase_admin import credentials
+from firebase_admin import credentials, firestore
 
 
 class Settings(BaseSettings):
@@ -8,7 +11,6 @@ class Settings(BaseSettings):
     FIREBASE_PRIVATE_KEY: str
     FIREBASE_CLIENT_EMAIL: str
     FIREBASE_DB_URL: str
-    DATABASE_URL: str = "postgresql://localhost:5432/postgres"
     PORT: int = 8000
 
     class Config:
@@ -33,3 +35,7 @@ def init_firebase():
         firebase_admin.initialize_app(cred, {
             'databaseURL': settings.FIREBASE_DB_URL
         })
+
+
+def get_firestore_client():
+    return firestore.client()

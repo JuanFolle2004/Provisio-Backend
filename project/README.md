@@ -7,8 +7,7 @@ FastAPI backend for group shopping organization with real-time features via Sock
 - Python 3.11
 - FastAPI + uvicorn
 - Pydantic for data validation
-- Firebase Admin SDK (authentication)
-- PostgreSQL (Neon) with asyncpg
+- Firebase Admin SDK (Authentication + Firestore)
 - Socket.IO (python-socketio) for real-time features
 - pytest for testing
 - Docker + docker-compose
@@ -32,7 +31,7 @@ FastAPI backend for group shopping organization with real-time features via Sock
 │   │   ├── catalog.py       # Product catalog/presets
 │   │   └── chat.py          # Chat history endpoint
 │   └── repositories/
-│       └── firestore.py     # Neon/PostgreSQL data access layer
+│       └── firestore.py     # Firestore CRUD operations
 ├── tests/
 │   ├── conftest.py          # Test fixtures
 │   ├── test_groups.py       # Group tests
@@ -48,9 +47,8 @@ FastAPI backend for group shopping organization with real-time features via Sock
 ### Prerequisites
 
 - Python 3.11+
-- Firebase project (for authentication)
+- Firebase project with Firestore enabled
 - Firebase service account credentials
-- Neon/PostgreSQL database URL
 
 ### Installation
 
@@ -62,7 +60,7 @@ FastAPI backend for group shopping organization with real-time features via Sock
 cp .env.example .env
 ```
 
-3. Update `.env` with your Firebase credentials and Neon connection string:
+3. Update `.env` with your Firebase credentials:
 
 ```env
 FIREBASE_PROJECT_ID=your-project-id
@@ -70,7 +68,6 @@ FIREBASE_PRIVATE_KEY=your-private-key
 FIREBASE_CLIENT_EMAIL=your-client-email
 FIREBASE_DB_URL=https://your-project-id.firebaseio.com
 PORT=8000
-DATABASE_URL=postgresql://user:password@host/db?sslmode=require
 ```
 
 4. Install dependencies:
@@ -285,8 +282,7 @@ ruff check app/ tests/
 The application uses:
 - FastAPI for REST API
 - Socket.IO for real-time bidirectional communication
-- Firebase Admin SDK for authentication
-- Neon/PostgreSQL (asyncpg) for persistent storage
+- Firebase Admin SDK for authentication and Firestore database
 - Pydantic for data validation and serialization
 
 ### Adding New Endpoints
