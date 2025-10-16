@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional
 
 import asyncpg
 
-from app.config import settings
+from project.app.config import settings
 
 
 class PostgresRepository:

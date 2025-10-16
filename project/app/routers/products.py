@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
-from app.models import ProductCreate, ProductUpdate, ProductResponse
-from app.deps import get_user_id
-from app.repositories.firestore import repo
+from project.app.models import ProductCreate, ProductUpdate, ProductResponse
+from project.app.deps import get_user_id
+from project.app.repositories.firestore import repo
 
 
 router = APIRouter(prefix="/groups/{group_id}/products", tags=["products"])

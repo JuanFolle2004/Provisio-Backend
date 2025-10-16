@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, Depends
-from app.models import CatalogProduct
-from app.deps import get_user_id
+from project.app.models import CatalogProduct
+from project.app.deps import get_user_id
 
 
 router = APIRouter(prefix="/catalog", tags=["catalog"])
