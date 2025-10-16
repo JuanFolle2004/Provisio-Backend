@@ -1,6 +1,6 @@
 import socketio
 from firebase_admin import auth as firebase_auth
-from project.app.repositories.firestore import repo
+from app.repositories.firestore import repo
 
 
 sio = socketio.AsyncServer(

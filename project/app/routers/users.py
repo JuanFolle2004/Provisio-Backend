@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from project.app.models import UserResponse
-from project.app.deps import get_current_user
-from project.app.repositories.firestore import repo
+from app.models import UserResponse
+from app.deps import get_current_user
+from app.repositories.firestore import repo
 
 
 router = APIRouter(prefix="/users", tags=["users"])

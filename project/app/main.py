@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import socketio
-#from project.app.config import init_firebase
-from project.app.routers import users, groups, products, catalog, chat
-from project.app.realtime import sio
+from app.config import init_firebase
+from app.routers import users, groups, products, catalog, chat
+from app.realtime import sio
 
 
-#init_firebase()
+init_firebase()
 
 app = FastAPI(
     title="Provisio API",
