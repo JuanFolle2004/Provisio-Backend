@@ -10,17 +10,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('threads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained("users");
-            $table->foreignId("thread_id")->constrained("threads");
-            $table->longText('content');
+            $table->foreignId('group_id')->unique()->constrained();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('threads');
     }
 };

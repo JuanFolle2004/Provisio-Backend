@@ -7,7 +7,7 @@ namespace Src\Groups\App\Controllers;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
 use Src\Groups\App\Requests\AddUserToGroupRequest;
-use Src\Groups\App\Resources\GroupResource;
+use Src\Groups\App\Resources\ProductResource;
 use Src\Groups\Domain\Model\Group;
 use Src\Shared\App\Exceptions\Http\UnauthorizedException;
 use Src\Users\Domain\Models\User;
@@ -27,6 +27,6 @@ class AddUserToGroupController
 
         $group->users()->syncWithoutDetaching($users);
 
-        return GroupResource::make($group)->response();
+        return ProductResource::make($group)->response();
     }
 }

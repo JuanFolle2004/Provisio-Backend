@@ -12,9 +12,9 @@ return new class extends Migration
     {
         Schema::create('assignment', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained("users");
-            $table->foreignId('group_id')->constrained("groups");
-            $table->foreignId("product_id")->constrained("products");
+            $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
+            $table->foreignId('group_id')->constrained("groups")->cascadeOnDelete();
+            $table->foreignId("product_id")->constrained("products")->cascadeOnDelete();
             $table->integer('amount');
             $table->integer('bought');
             $table->timestamps();

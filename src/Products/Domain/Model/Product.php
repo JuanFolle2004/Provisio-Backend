@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Products\Domain\Model;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -24,6 +25,8 @@ use Src\Users\Domain\Models\User;
  * @property-read Group $group
  * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $users
  * @property-read int|null $users_count
+ * @property-read bool $is_free
+ * @property-read int $remaining_amount
  *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Product newQuery()
@@ -43,6 +46,9 @@ class Product extends Model
 
     protected $guarded = [];
 
+    // @phpstan-ignore-next-line
+    protected $appends = ['is_free', 'remaining_amount'];
+
     /**
      * @return BelongsTo<Group, $this>
      */
@@ -57,6 +63,30 @@ class Product extends Model
     public function assignments(): HasMany
     {
         return $this->hasMany(Assignment::class);
+    }
+
+    /**
+     * @return Attribute<bool, never>
+     */
+    public function isFree(): Attribute
+    {
+        $assigned = $this->assignments()->sum('amount');
+
+        return Attribute::make(
+            get: fn (): bool => $this->amount - $assigned > 0
+        );
+    }
+
+    /**
+     * @return Attribute<int, never>
+     */
+    public function remainingAmount(): Attribute
+    {
+        $assigned = $this->assignments()->sum('amount');
+
+        return Attribute::make(
+            get: fn (): int|float => $this->amount - $assigned
+        );
     }
 
     /**

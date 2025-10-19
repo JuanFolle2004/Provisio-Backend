@@ -7,6 +7,7 @@ namespace Src\Groups\Domain\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Src\Assignment\Domain\Model\Assignment;
 use Src\Products\Domain\Model\Product;
 use Src\Users\Domain\Models\User;
@@ -65,5 +66,13 @@ class Group extends Model
     public function assignments(): HasMany
     {
         return $this->hasMany(Assignment::class);
+    }
+
+    /**
+     * @return HasOne<Thread, $this>
+     */
+    public function thread(): HasOne
+    {
+        return $this->hasOne(Thread::class);
     }
 }
