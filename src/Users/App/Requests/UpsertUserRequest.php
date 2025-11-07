@@ -43,8 +43,7 @@ class UpsertUserRequest extends FormRequest
                 Password::min(8)
                     ->max(64)
                     ->letters()
-                    ->numbers()
-                    ->uncompromised(),
+                    ->numbers(),
                 'confirmed',
             ],
             self::USERNAME => ['required', 'string', 'max:100'],

@@ -10,6 +10,7 @@ use Src\Assignment\App\Controllers\DeleteAssignmentController;
 use Src\Assignment\App\Controllers\GetAssignmentController;
 use Src\Assignment\App\Controllers\PatchAssignmentController;
 use Src\Groups\App\Controllers\GetGroupController;
+use Src\Groups\App\Controllers\ListGroupsController;
 use Src\Groups\App\Controllers\UpsertGroupController;
 
 
@@ -65,4 +66,5 @@ Route::prefix('groups')
     ->group(static function (): void {
         Route::get('/{group}', GetGroupController::class);
         Route::post('/',UpsertGroupController::class);
+        Route::get('/',ListGroupsController::class);
     });
