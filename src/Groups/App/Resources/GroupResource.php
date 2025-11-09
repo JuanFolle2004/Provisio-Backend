@@ -16,9 +16,11 @@ class GroupResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'assignments_count' => $this->assignments_count,
-            'products_count' => $this->products_count,
-            'users_count' => $this->users_count,
+            'id' => $this->id,
+            'name' => $this->name,
+            'assignments_count' =>$this->whenLoaded('assignments')->count(),
+            'products_count' => $this->whenLoaded('products')->count(),
+            'users_count' => $this->whenLoaded('users')->count(),
         ];
     }
 }

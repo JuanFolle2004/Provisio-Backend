@@ -31,4 +31,34 @@ class AssignmentFactory extends Factory
             'bought' => fake()->numberBetween(0, $amount),
         ];
     }
+    public function configure(): static
+    {
+        return $this->afterCreating(function ($assignment) {
+            $group = $assignment->group;
+            $product = $assignment->product;
+
+
+            if (!$group->products()->where('products.id', $product->id)->exists()) {
+                $group->products()->attach($product->id);
+            }
+        });
+    }
+
+    public function forGroup(Group $group): Factory{
+        return $this->state([
+            'group_id' => $group->id,
+        ]);
+    }
+
+    public function forProduct(Product $product): Factory{
+        return $this->state([
+            'product_id' => $product->id,
+        ]);
+    }
+
+    public function forUser(User $user): Factory{
+        return $this->state([
+            'user_id' => $user->id,
+        ]);
+    }
 }

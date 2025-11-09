@@ -6,6 +6,7 @@ namespace Src\Groups\App\Controllers;
 
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
+use Src\Groups\App\Resources\GroupResource;
 use Src\Groups\App\Resources\ProductResource;
 use Src\Users\Domain\Models\User;
 
@@ -15,6 +16,6 @@ class ListGroupsController
         #[CurrentUser]
         User $currentUser,
     ): JsonResponse {
-        return ProductResource::collection($currentUser->groups)->response();
+        return GroupResource::collection($currentUser->groups()->with(['users','assignments','products'])->get())->response();
     }
 }
