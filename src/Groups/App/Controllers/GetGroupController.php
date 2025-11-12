@@ -6,7 +6,7 @@ namespace Src\Groups\App\Controllers;
 
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
-use Src\Groups\App\Resources\ProductResource;
+use Src\Groups\App\Resources\GroupResource;
 use Src\Groups\Domain\Model\Group;
 use Src\Shared\App\Exceptions\Http\UnauthorizedException;
 use Src\Users\Domain\Models\User;
@@ -19,6 +19,6 @@ class GetGroupController
             throw new UnauthorizedException('Cant see a group you are not part of');
         }
 
-        return ProductResource::make($group)->response();
+        return GroupResource::make($group)->response();
     }
 }

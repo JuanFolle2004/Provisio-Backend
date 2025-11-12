@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+
+
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Route;
 use Src\Users\App\Controllers\{GetUserController, DeleteUserController, ListUserController, SignUpController, UpdateUserController,LoginController};
@@ -12,6 +14,7 @@ use Src\Assignment\App\Controllers\PatchAssignmentController;
 use Src\Groups\App\Controllers\GetGroupController;
 use Src\Groups\App\Controllers\ListGroupsController;
 use Src\Groups\App\Controllers\UpsertGroupController;
+use Src\Products\App\Controllers\ListProductController;
 
 
 /*
@@ -67,4 +70,10 @@ Route::prefix('groups')
         Route::get('/{group}', GetGroupController::class);
         Route::post('/',UpsertGroupController::class);
         Route::get('/',ListGroupsController::class);
+    });
+
+Route::prefix('products')
+    ->middleware(['auth:api'])
+    ->group(static function (): void {
+        Route::get('/{group}',ListProductController::class);
     });
