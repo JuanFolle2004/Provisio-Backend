@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Src\Groups\Domain\Dtos;
 
-use Carbon\CarbonImmutable;
 use Src\Groups\Domain\Model\Group;
 use Src\Users\Domain\Models\User;
 

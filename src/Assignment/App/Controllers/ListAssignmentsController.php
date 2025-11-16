@@ -6,17 +6,20 @@ namespace Src\Assignment\App\Controllers;
 
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
-use Src\Assignment\App\Request\AssignProductRequest;
 use Src\Assignment\App\Resources\AssignmentResource;
-use Src\Assignment\Domain\Model\Assignment;
-use Src\Products\Domain\Model\Product;
 use Src\Users\Domain\Models\User;
 
 class ListAssignmentsController
 {
     public function __invoke(#[CurrentUser] User $currentUser): JsonResponse
     {
-        $assignments = $currentUser->assignments()->with(['user','product'])->whereRelation('group','due_date','>=',now())->get();
+        $assignments = $currentUser->assignments()->with(['user', 'product'])->whereRelation(
+            'group',
+            'due_date',
+            '>=',
+            now()
+        )->get();
+
         return AssignmentResource::collection($assignments)->response();
     }
 }

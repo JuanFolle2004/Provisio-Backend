@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Src\Products\App\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
 use Src\Products\Domain\Dtos\ProductDto;
 

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Broadcast;
 use Src\Users\Domain\Models\User;
 use Illuminate\Support\Facades\Log;
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+Broadcast::channel('App.Models.User.{id}', function ($user, $id): bool {
     return (int) $user->id === (int) $id;
 });
 

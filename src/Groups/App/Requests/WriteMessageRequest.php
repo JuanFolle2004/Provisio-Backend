@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 namespace Src\Groups\App\Requests;
 
@@ -18,8 +19,10 @@ class WriteMessageRequest extends FormRequest
         ];
     }
 
-    public function toDto(): MessageDto{
+    public function toDto(): MessageDto
+    {
         $user = User::find($this->integer('user_id'));
+
         return new MessageDto(
             user: $user,
             group: $user->groups()->with(['thread.messages'])->get()->where('id', $this->integer('group_id'))->first(),
