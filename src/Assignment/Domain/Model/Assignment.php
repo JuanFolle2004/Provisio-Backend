@@ -6,6 +6,7 @@ namespace Src\Assignment\Domain\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Src\Groups\Domain\Model\Group;
 use Src\Products\Domain\Model\Product;
 use Src\Users\Domain\Models\User;
 
@@ -55,5 +56,13 @@ class Assignment extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * @return BelongsTo<Group, $this>
+     */
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
     }
 }

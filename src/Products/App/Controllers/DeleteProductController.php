@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Controllers;
+namespace Src\Products\App\Controllers;
 
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;

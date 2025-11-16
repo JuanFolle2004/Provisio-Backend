@@ -34,12 +34,13 @@ class AssignmentFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function ($assignment) {
+            $assignment->load(['group', 'product']);
             $group = $assignment->group;
             $product = $assignment->product;
 
 
             if (!$group->products()->where('products.id', $product->id)->exists()) {
-                $group->products()->attach($product->id);
+                $group->products()->save($product);
             }
         });
     }

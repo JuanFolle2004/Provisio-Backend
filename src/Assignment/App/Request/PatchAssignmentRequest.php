@@ -16,7 +16,7 @@ class PatchAssignmentRequest extends FormRequest
         return [
             'assignment_id'=>['required', 'integer', Rule::exists(Assignment::class, 'id')],
             'amount' => ['required', 'integer', 'min:1'],
-            'bought'=>['required', 'integer', 'min:1', 'lte:amount'],
+            'bought'=>['required', 'integer', 'min:0', 'lte:amount'],
         ];
     }
 

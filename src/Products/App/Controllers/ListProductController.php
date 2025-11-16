@@ -8,8 +8,9 @@ use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
-use Src\Groups\App\Resources\ProductResource;
+
 use Src\Groups\Domain\Model\Group;
+use Src\Products\App\Resources\ProductResource;
 use Src\Products\Domain\Model\Product;
 
 class ListProductController

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Controllers;
+namespace Src\Products\App\Controllers;
 
-use CreateProductRequest;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
-use Src\Groups\App\Resources\ProductResource;
+use Src\Products\App\Requests\CreateProductRequest;
+use Src\Products\App\Resources\ProductResource;
 use Src\Products\Domain\Dtos\ProductDto;
 use Src\Products\Domain\Model\Product;
 use Src\Shared\App\Exceptions\Http\UnauthorizedException;
@@ -30,7 +30,7 @@ class CreateProductController
 
     public function createProduct(ProductDto $dto, User $user): Product
     {
-        if (! $user->groups()->where('id', $dto->group_id)->exists()) {
+        if (! $user->groups()->where('group_id', $dto->group_id)->exists()) {
             throw new UnauthorizedException();
         }
 

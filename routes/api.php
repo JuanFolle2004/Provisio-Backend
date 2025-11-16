@@ -3,17 +3,20 @@
 declare(strict_types=1);
 
 
-
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Route;
 use Src\Users\App\Controllers\{GetUserController, DeleteUserController, ListUserController, SignUpController, UpdateUserController,LoginController};
 use Src\Assignment\App\Controllers\AssignProductController;
 use Src\Assignment\App\Controllers\DeleteAssignmentController;
 use Src\Assignment\App\Controllers\GetAssignmentController;
+use Src\Assignment\App\Controllers\ListAssignmentsController;
 use Src\Assignment\App\Controllers\PatchAssignmentController;
 use Src\Groups\App\Controllers\GetGroupController;
 use Src\Groups\App\Controllers\ListGroupsController;
+use Src\Groups\App\Controllers\ListMessageController;
+use Src\Groups\App\Controllers\PostMessageController;
 use Src\Groups\App\Controllers\UpsertGroupController;
+use Src\Products\App\Controllers\CreateProductController;
 use Src\Products\App\Controllers\ListProductController;
 
 
@@ -76,4 +79,24 @@ Route::prefix('products')
     ->middleware(['auth:api'])
     ->group(static function (): void {
         Route::get('/{group}',ListProductController::class);
+        Route::post('/',CreateProductController::class);
     });
+
+Route::prefix('assignments')
+    ->middleware(['auth:api'])
+    ->group(static function (): void {
+        Route::get('/{assignment}',GetAssignmentController::class);
+        Route::delete('/{assignment}',DeleteAssignmentController::class);
+        Route::put('/',PatchAssignmentController::class);
+        Route::post('/assign', AssignProductController::class);
+        Route::get('/', ListAssignmentsController::class);
+    });
+
+Route::prefix('messages')
+    ->middleware(['auth:api'])
+    ->group(static function (): void {
+        Route::post('/',PostMessageController::class);
+        Route::get('/{group}',ListMessageController::class);
+    });
+
+Broadcast::routes(['middleware' => ['auth:api']]);

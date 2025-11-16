@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-
+namespace Src\Products\App\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Src\Products\Domain\Dtos\ProductDto;
 
@@ -13,7 +13,7 @@ class CreateProductRequest extends FormRequest
         return [
             'group_id'=>['required', 'integer', 'exists:groups,id'],
             'products'=>['required', 'array'],
-            'product.*'=>['required', 'array'],
+            'products.*'=>['required', 'array'],
             'products.*.name'=>['required', 'string'],
             'products.*.amount'=>['required', 'integer', 'min:1'],
             ];
