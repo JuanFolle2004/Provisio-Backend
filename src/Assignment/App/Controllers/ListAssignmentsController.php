@@ -18,7 +18,7 @@ class ListAssignmentsController
             'due_date',
             '>=',
             now()
-        )->get();
+        )->get()->sortBy('product.name');
 
         return AssignmentResource::collection($assignments)->response();
     }
