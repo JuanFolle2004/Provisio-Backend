@@ -18,6 +18,6 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'amount' => $this->amount];
+            'amount' => $this->amount - $this->assignments->sum('bought'),];
     }
 }

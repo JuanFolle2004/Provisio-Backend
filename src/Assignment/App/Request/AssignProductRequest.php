@@ -16,7 +16,7 @@ class AssignProductRequest extends FormRequest
             'product_id' => ['required', Rule::exists('products', 'id')],
             'group_id' => ['required', Rule::exists('groups', 'id')],
             'amount' => ['required', 'integer', 'min:1'],
-            'bought'=>['required', 'integer', 'min:1', 'lte:amount'],
+            'bought'=>['required', 'integer', 'min:0', 'lte:amount'],
         ];
     }
 

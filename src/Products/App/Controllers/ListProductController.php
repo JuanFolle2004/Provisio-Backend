@@ -19,6 +19,7 @@ class ListProductController
     {
         $query = QueryBuilder::for(Product::class)
             ->where('group_id', $group->id)
+            ->with('assignments')
             ->allowedFilters([
                 AllowedFilter::exact('is_free'),
             ])
@@ -26,6 +27,8 @@ class ListProductController
             AllowedSort::field('name'),
             AllowedSort::field('amount'),
                  ]);
+
+
 
         return ProductResource::collection($query->paginate(10))->response();
     }
